@@ -1,23 +1,23 @@
-using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class zoom : MonoBehaviour
+public class Zoom : MonoBehaviour
 {
-    public Camera camera;
-    private Vector2 prevTouch1;
-    private Vector2 prevTouch2;
-    public float zoomSpeed=0.5f;
-    private float orthographicSize;
+    public Camera target;
+    private Vector3 prevTouch1;
+    private Vector3 prevTouch2;
+    public float zoom_speed = 1f;
+    public float Size;
 
-    // Start is called before the first frame update
+    // Задаём прямоугольную область, в которой зум не будет работать
+    public Rect excludedArea;
+
     void Start()
     {
-        camera = Camera.main;
-        orthographicSize=camera.orthographicSize;
+        target = Camera.main;
+        Size = target.orthographicSize;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (Input.touchCount == 2)
@@ -25,6 +25,11 @@ public class zoom : MonoBehaviour
             // Получаем информацию о касаниях
             Touch touch1 = Input.GetTouch(0);
             Touch touch2 = Input.GetTouch(1);
+
+            if (touch1.position.y <= 600 || touch1.position.x <= 700)
+            {
+                return;
+            }
 
             // Если это начало касания
             if (touch1.phase == TouchPhase.Began || touch2.phase == TouchPhase.Began)
@@ -43,13 +48,22 @@ public class zoom : MonoBehaviour
 
                 float difference = currentMagnitude - prevMagnitude;
 
-                // Меняем размер ортографической камеры в зависимости от разницы в расстоянии между пальцами
-                camera.orthographicSize = Mathf.Clamp(camera.orthographicSize - ( difference * zoomSpeed*Time.deltaTime), 1f, Mathf.Infinity);
+                // Проверяем, находится ли текущее касание в исключенной области (облась джойстика)
+                if (!IsPointInExcludedArea(currentTouch1) && !IsPointInExcludedArea(currentTouch2))
+                {
+                    // Меняем размер ортографической камеры, только если оба касания вне исключенной области
+                    target.orthographicSize = Mathf.Clamp(target.orthographicSize - difference * zoom_speed * Time.deltaTime, 1f, 10f);
+                }
 
                 prevTouch1 = currentTouch1;
                 prevTouch2 = currentTouch2;
             }
         }
+    }
 
+    // Проверка, находится ли точка в исключенной области
+    private bool IsPointInExcludedArea(Vector2 point)
+    {
+        return excludedArea.Contains(point);
     }
 }
