@@ -23,7 +23,6 @@ public class controller : MonoBehaviour
         Vector3 velosityMap= new Vector3((joystick.Horizontal) * speed, 0, (joystick.Vertical) * speed);
         Quaternion rotationQuaternion =  Quaternion.Euler(0, 45, 0);
         Vector3 rotatedVector = rotationQuaternion * velosityMap;
-        //obj.transform.position = Vector3.SmoothDamp(currentPosition, (rotatedVector+currentPosition),ref velocity, d);
         obj.velocity = rotatedVector;
     }
 }
