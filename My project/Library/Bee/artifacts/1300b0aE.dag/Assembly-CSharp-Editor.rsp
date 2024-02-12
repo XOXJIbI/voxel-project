@@ -388,7 +388,7 @@
 "Assets/Joystick Pack/Scripts/Editor/FloatingJoystickEditor.cs"
 "Assets/Joystick Pack/Scripts/Editor/JoystickEditor.cs"
 "Assets/Joystick Pack/Scripts/Editor/VariableJoystickEditor.cs"
-"Assets/TutorialInfo/Scripts/Editor/ReadmeEditor.cs"
+"Assets/Scenes/TutorialInfo/Scripts/Editor/ReadmeEditor.cs"
 -langversion:9.0
 
 /deterministic

@@ -65,7 +65,7 @@
     <Compile Include="Assets\controller.cs" />
     <Compile Include="Assets\day_phase_shifting.cs" />
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
-    <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Compile Include="Assets\Scenes\TutorialInfo\Scripts\Readme.cs" />
     <Compile Include="Assets\zoom.cs" />
     <Compile Include="Assets\ClimbingController.cs" />
     <Compile Include="Assets\moving.cs" />
