@@ -26,15 +26,18 @@ public class ClimbingController : MonoBehaviour
         if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, raycastDistance, obstacleMask))
         {
             // ≈сли луч столкнулс€ с преп€тствием, провер€ем его высоту
-            float obstacleHeight = hit.point.y - transform.position.y + 1; // ¬ысота преп€тстви€ относительно текущей позиции персонажа
-            if (obstacleHeight <= maxObstacleHeight)
+            float obstacleHeight = hit.point.y - transform.position.y; // ¬ысота преп€тстви€ относительно текущей позиции персонажа
+            if (rb.velocity != Vector3.zero)
             {
-              // ≈сли высота преп€тстви€ меньше или равна максимальной высоте, выполн€ем прыжок
-               Jump();
+                if (obstacleHeight <= maxObstacleHeight)
+                {
+                    // ≈сли высота преп€тстви€ меньше или равна максимальной высоте, выполн€ем прыжок
+                    Jump();
+                }
             }
         }
     }
-
+    
     void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
