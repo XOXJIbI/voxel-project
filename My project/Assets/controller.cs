@@ -17,12 +17,13 @@ public class controller : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         Vector3 currentPosition = obj.position;
         Vector3 velosityMap= new Vector3((joystick.Horizontal) * speed, 0, (joystick.Vertical) * speed);
         Quaternion rotationQuaternion =  Quaternion.Euler(0, 45, 0);
         Vector3 rotatedVector = rotationQuaternion * velosityMap;
         obj.velocity = rotatedVector;
+        transform.LookAt(transform.position + rotatedVector);
     }
 }
