@@ -20,10 +20,13 @@ public class ClimbingController : MonoBehaviour
     
         // Определите направление луча (например, направление взгляда персонажа или его направление движения)
         Vector3 raycastDirection = transform.forward; // Пример: направление вперед от персонажа
-
+        Quaternion rotationQuaternion = Quaternion.Euler(0, 40, 0);
+        Vector3 rotatedVector = rotationQuaternion * raycastDirection;
         // Проверяем наличие препятствия перед персонажем
         RaycastHit hit;
-        if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, raycastDistance, obstacleMask))
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, raycastDistance, obstacleMask)|| 
+            Physics.Raycast(raycastOrigin, rotatedVector, out hit, raycastDistance, obstacleMask)||
+            Physics.Raycast(raycastOrigin, -rotatedVector, out hit, raycastDistance, obstacleMask))
         {
             // Если луч столкнулся с препятствием, проверяем его высоту
             float obstacleHeight = hit.point.y - transform.position.y; // Высота препятствия относительно текущей позиции персонажа
@@ -40,6 +43,7 @@ public class ClimbingController : MonoBehaviour
     
     void Jump()
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        transform.Translate(0, jumpForce, 0);
     }
 }
