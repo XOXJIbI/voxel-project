@@ -21,10 +21,10 @@ public class ClimbingController : MonoBehaviour
         Vector3 raycastFake = transform.position;
         // Определите направление луча (например, направление взгляда персонажа или его направление движения)
         Vector3 raycastDirection = transform.forward; // Пример: направление вперед от персонажа
-        
+
         // Проверяем наличие препятствия перед персонажем
         RaycastHit hit;
-        if ((Physics.Raycast(raycastOrigin1, raycastDirection, out hit, raycastDistance, obstacleMask) || 
+        if ((Physics.Raycast(raycastOrigin1, raycastDirection, out hit, raycastDistance, obstacleMask) ||
             Physics.Raycast(raycastOrigin2, raycastDirection, out hit, raycastDistance, obstacleMask) ||
             Physics.Raycast(raycastOrigin, raycastDirection, out hit, raycastDistance, obstacleMask)) &&
             !Physics.Raycast(raycastFake, raycastDirection, out hit, raycastDistance, obstacleMask))
@@ -36,7 +36,7 @@ public class ClimbingController : MonoBehaviour
             }
         }
     }
-    
+
     void Jump()
     {
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
