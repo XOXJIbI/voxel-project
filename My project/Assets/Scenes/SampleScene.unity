@@ -1050,12 +1050,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0e86d9d836af6c4482bc6d3f8fd64fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxObstacleHeight: 1
   raycastDistance: 0.7
   obstacleMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  jumpForce: 0.7
+  jumpForce: 0.9
 --- !u!1001 &2134526860
 PrefabInstance:
   m_ObjectHideFlags: 0
