@@ -24,6 +24,6 @@ public class controller : MonoBehaviour
         Quaternion rotationQuaternion =  Quaternion.Euler(0, 45, 0);
         Vector3 rotatedVector = rotationQuaternion * velosityMap;
         obj.velocity = rotatedVector;
-        transform.LookAt(transform.position + rotatedVector);
+        transform.LookAt(transform.position+rotatedVector);
     }
 }

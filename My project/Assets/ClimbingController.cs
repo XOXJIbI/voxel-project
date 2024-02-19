@@ -15,19 +15,17 @@ public class ClimbingController : MonoBehaviour
     void Update()
     {
         // Определите начальную позицию луча (например, нижний конец персонажа)
-        Vector3 raycastOrigin1 = transform.position - new Vector3(0.15f, 0.6f, 0f); // Например, смещаем луч вниз от центра персонажа на половину высоты
-        Vector3 raycastOrigin2 = transform.position - new Vector3(-0.15f, 0.6f, 0f);
         Vector3 raycastOrigin = transform.position - new Vector3(0f, 0.6f, 0f);
         Vector3 raycastFake = transform.position;
         // Определите направление луча (например, направление взгляда персонажа или его направление движения)
         Vector3 raycastDirection = transform.forward; // Пример: направление вперед от персонажа
-
+        Quaternion rotationQuaternion = Quaternion.Euler(0, 40, 0);
+        Vector3 rotatedVector = rotationQuaternion * raycastDirection;
         // Проверяем наличие препятствия перед персонажем
         RaycastHit hit;
-        if ((Physics.Raycast(raycastOrigin1, raycastDirection, out hit, raycastDistance, obstacleMask) ||
-            Physics.Raycast(raycastOrigin2, raycastDirection, out hit, raycastDistance, obstacleMask) ||
-            Physics.Raycast(raycastOrigin, raycastDirection, out hit, raycastDistance, obstacleMask)) &&
-            !Physics.Raycast(raycastFake, raycastDirection, out hit, raycastDistance, obstacleMask))
+        if (Physics.Raycast(raycastOrigin, raycastDirection, out hit, raycastDistance, obstacleMask)|| 
+            Physics.Raycast(raycastOrigin, rotatedVector, out hit, raycastDistance, obstacleMask)||
+            Physics.Raycast(raycastOrigin, -rotatedVector, out hit, raycastDistance, obstacleMask))
         {
             if (rb.velocity.x != 0 && rb.velocity.z != 0 && rb.velocity.y == 0)
             {
@@ -39,6 +37,7 @@ public class ClimbingController : MonoBehaviour
 
     void Jump()
     {
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        //rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        transform.Translate(0, jumpForce, 0);
     }
 }
